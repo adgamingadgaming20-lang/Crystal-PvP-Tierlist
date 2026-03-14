@@ -7,6 +7,75 @@
 
 <style>
 
+.overall-list{
+max-width:10000px;
+margin:auto;
+}
+
+.overall-player{
+display:flex;
+align-items:center;
+gap:15px;
+background:#111a2e;
+padding:12px;
+border-radius:10px;
+margin-bottom:10px;
+}
+
+.rank{
+font-size:22px;
+font-weight:bold;
+width:40px;
+text-align:center;
+}
+
+.gold{color:#ffd700}
+.silver{color:#c0c0c0}
+.bronze{color:#cd7f32}
+
+.head{
+width:40px;
+height:40px;
+}
+
+.info{
+flex:1;
+}
+
+.name{
+font-weight:bold;
+font-size:16px;
+}
+
+.points{
+font-size:13px;
+color:#9bb3ff;
+}
+
+.region{
+padding:4px 8px;
+border-radius:6px;
+font-size:12px;
+}
+
+.na{background:#a33;}
+.eu{background:#2a8f4b;}
+.as{background:#8f6b2a;}
+
+.tiers{
+display:flex;
+gap:3px;
+}
+
+.tier{
+padding:5px 10px;
+border-radius:3px;
+font-size:11px;
+}
+
+.ht1{background:#ffb300;}
+.lt1{background:#888;}
+
 body{
 background:#0b1220;
 font-family:Arial;
@@ -54,9 +123,14 @@ flex-wrap:wrap;
 .tier{
 background:#111a2e;
 padding:15px;
-border-radius:10px;
-width:200px;
-box-shadow:0 0 10px rgba(0,0,0,0.5);
+border-radius:12px;
+width:220px;
+box-shadow:0 0 15px rgba(0,0,0,0.6);
+transition:0.2s;
+}
+
+.tier:hover{
+transform:translateY(-5px);
 }
 
 .tier h2{
@@ -108,6 +182,15 @@ width:28px;
 height:28px;
 }
 
+.mode{
+animation:fade 0.3s ease;
+}
+
+@keyframes fade{
+from{opacity:0;}
+to{opacity:1;}
+}
+
 /* Popup */
 
 .popup{
@@ -132,15 +215,311 @@ border-radius:6px;
 cursor:pointer;
 }
 
+h1{
+font-family:'Press Start 2P', cursive;
+}
+
+/* 🥇 Gold - Rank 1 */
+
+.gold{
+color:#ffd700;
+}
+
+.overall-player:has(.gold){
+border:2px solid #ffd700;
+box-shadow:0 0 15px #ffd700;
+background:linear-gradient(90deg,#2b2100,#111a2e);
+}
+
+
+/* 🥈 Silver - Rank 2 */
+
+.silver{
+color:#c0c0c0;
+}
+
+.overall-player:has(.silver){
+border:2px solid #c0c0c0;
+box-shadow:0 0 12px #c0c0c0;
+background:linear-gradient(90deg,#222,#111a2e);
+}
+
+
+/* 🥉 Bronze - Rank 3 */
+
+.bronze{
+color:#cd7f32;
+}
+
+.overall-player:has(.bronze){
+border:2px solid #cd7f32;
+box-shadow:0 0 10px #cd7f32;
+background:linear-gradient(90deg,#2a1a0f,#111a2e);
+}
+
+.overall-player:hover{
+transform:scale(1.03);
+transition:0.2s;
+}
+
+.gold{
+color:#ffd700;
+animation:crownGlow 2s infinite alternate;
+}
+
+@keyframes crownGlow{
+from{
+text-shadow:0 0 5px #ffd700;
+}
+to{
+text-shadow:0 0 20px #ffd700;
+}
+}
+
+.overall-player:has(.gold){
+
+border:2px solid gold;
+
+background:linear-gradient(
+90deg,
+#1a1400,
+#ffd700,
+#1a1400
+);
+
+background-size:200% 200%;
+
+animation:goldShine 4s linear infinite;
+
+}
+
+@keyframes goldShine{
+
+0%{background-position:0% 50%;}
+
+100%{background-position:200% 50%;}
+
+}
+
+.overall-player:has(.silver){
+
+border:2px solid #c0c0c0;
+
+background:linear-gradient(
+90deg,
+#1a1a1a,
+#c0c0c0,
+#1a1a1a
+);
+
+background-size:200% 200%;
+
+animation:silverShine 4s linear infinite;
+
+}
+
+@keyframes silverShine{
+0%{background-position:0% 50%;}
+100%{background-position:200% 50%;}
+}
+
+.overall-player:has(.bronze){
+
+border:2px solid #cd7f32;
+
+background:linear-gradient(
+90deg,
+#2a1a0f,
+#cd7f32,
+#2a1a0f
+);
+
+background-size:200% 200%;
+
+animation:bronzeShine 4s linear infinite;
+
+}
+
+@keyframes bronzeShine{
+0%{background-position:0% 50%;}
+100%{background-position:200% 50%;}
+}
+
+/* leaderboard animation */
+
+.move-up{
+animation:moveUp 0.6s ease;
+}
+
+.move-down{
+animation:moveDown 0.6s ease;
+}
+
+@keyframes moveUp{
+0%{
+transform:translateY(30px);
+opacity:0;
+}
+100%{
+transform:translateY(0);
+opacity:1;
+}
+}
+
+@keyframes moveDown{
+0%{
+transform:translateY(-30px);
+opacity:0;
+}
+100%{
+transform:translateY(0);
+opacity:1;
+}
+}
+
+.tier{
+animation:tierPop 2s infinite ease-in-out;
+}
+
+@keyframes tierPop{
+0%,100%{transform:translateY(0);}
+50%{transform:translateY(-3px);}
+}
+
+.head{
+transition: transform 0.5s ease;
+transform-style: preserve-3d;
+}
+
+.overall-player:hover .head{
+transform: rotateY(180deg) scale(1.15);
+}
+
+.player{
+display:flex;
+align-items:center;
+gap:14px;
+background:#0f172a;
+padding:12px;
+border-radius:12px;
+margin-bottom:10px;
+border:1px solid #1f2a44;
+transition:0.25s;
+}
+
+.player:hover{
+transform:translateY(-3px) scale(1.02);
+box-shadow:0 6px 18px rgba(0,0,0,0.5);
+border-color:#3b82f6;
+}
+
+.head{
+width:40px;
+height:40px;
+border-radius:6px;
+image-rendering:pixelated;
+border:2px solid #1f2a44;
+transition:0.25s;
+}
+
+.player:hover .head{
+transform:scale(1.15);
+box-shadow:0 0 10px cyan;
+}
+
+.mode h1{
+text-align:center;
+font-size:28px;
+margin-bottom:20px;
+letter-spacing:1px;
+text-shadow:0 0 8px rgba(255,255,255,0.2);
+}
+
+.tier-section{
+background:#0b1220;
+border-radius:12px;
+padding:15px;
+margin-bottom:20px;
+border:1px solid #1f2a44;
+}
+
+.tier-section h2{
+margin-bottom:10px;
+color:#9ca3af;
+font-size:18px;
+}
+
+.player{
+animation:fadeUp 0.35s ease;
+}
+
+@keyframes fadeUp{
+0%{
+opacity:0;
+transform:translateY(8px);
+}
+100%{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.mode-buttons button{
+background:#1e293b;
+color:white;
+border:none;
+padding:8px 14px;
+border-radius:8px;
+margin:4px;
+cursor:pointer;
+transition:0.2s;
+}
+
+.mode-buttons button:hover{
+background:#3b82f6;
+transform:translateY(-2px);
+}
+
+/* tier slide animation */
+
+.tier-section{
+opacity:0;
+transform:translateY(20px);
+animation:tierSlide 0.5s forwards;
+}
+
+/* stagger delay for tiers */
+
+.tier-section:nth-child(1){animation-delay:0.05s;}
+.tier-section:nth-child(2){animation-delay:0.12s;}
+.tier-section:nth-child(3){animation-delay:0.2s;}
+.tier-section:nth-child(4){animation-delay:0.28s;}
+.tier-section:nth-child(5){animation-delay:0.36s;}
+.tier-section:nth-child(6){animation-delay:0.44s;}
+
+@keyframes tierSlide{
+0%{
+opacity:0;
+transform:translateY(25px);
+}
+100%{
+opacity:1;
+transform:translateY(0);
+}
+}
+
 </style>
 
 </head>
 
 <body>
 
-<body background="C:\Users\AjOy\OneDrive\Documents\1.jpg">
+<body style="background-image:url('1.jpg');">
 
 <h1>🏆PvP Tier List🏆</h1>
+<div style="text-align:center;margin:20px;">
+<input type="text" id="playerSearch" placeholder="🔎 Search player..." onkeyup="searchPlayer()" style="padding:10px;width:250px;border-radius:8px;border:none;">
+</div>
 <h1>
 <font face="Gongzaga">
 <font color="yellow">🚨If you want to prove your skills and climb the ranks, this is your chance⚔️</h1></font></font>
@@ -151,14 +530,437 @@ cursor:pointer;
 
 <div class="gamemodes">
 
-<P align="center"><button onclick="showMode('cpvp')">💎 Crystal</button>
+<P align="center"><button onclick="showMode('overall')">🏆 Overall</button>
+<button onclick="showMode('cpvp')">💎 Crystal</button>
 <button onclick="showMode('uhc')">🏹 UHC</button>
 <button onclick="showMode('mace')">🔨 Mace</button>
 <button onclick="showMode('sword')">⚔️ Sword</button>
 <button onclick="showMode('smp')">🌍 SMP</button>
 <button onclick="showMode('nethpot')">🔥 NethPot</button>
 <button onclick="showMode('dpot')">💧 DiamondPot</button>
-<button onclick="showMode('axe')">🪓 Axe</button></P>
+<button onclick="showMode('axe')">🪓 Axe</button></p>
+
+</div>
+
+<div id="overall" class="mode" style="display:block">
+
+<h1>🏆 Overall Rankings</h1>
+
+<div class="overall-list">
+
+<div class="overall-player">
+
+<div class="rank gold">👑 1</div>
+
+<img class="head" src="https://minotar.net/avatar/Ahnaf811">
+
+<div class="info">
+<div class="name">Ahnaf811</div>
+<div class="points">Rookie (18 points)</div>
+</div>
+
+<div class="region as">AS</div>
+
+<div class="tiers">
+<span class="tier ht4">HT4(Mace)🔨</span>
+<span class="tier ht4">HT4(Sword)⚔️</span>
+<span class="tier ht4">HT4(SMP)🌍</span>
+<span class="tier ht4">HT4(NethPot)🔥</span>
+<span class="tier ht4">HT5(Cpvp)🔷</span>
+</div>
+
+</div>
+
+
+<div class="overall-player">
+
+<div class="rank silver">2</div>
+
+<img class="head" src="https://minotar.net/avatar/AXENotMenace">
+
+<div class="info">
+<div class="name">AXENotMenace</div>
+<div class="points">Rookie (10 points)</div>
+</div>
+
+<div class="region eu">EU</div>
+
+<div class="tiers">
+<span class="tier ht4">HT4(Sword)⚔️</span>
+<span class="tier ht4">LT3(Cpvp)🔷</span>
+</div>
+
+</div>
+
+<div class="overall-player">
+
+<div class="rank silver">2</div>
+
+<img class="head" src="https://minotar.net/avatar/MezhuKhotuo">
+
+<div class="info">
+<div class="name">MezhuKhotuo</div>
+<div class="points">Rookie (10 points)</div>
+</div>
+
+<div class="region as">AS</div>
+
+<div class="tiers">
+<span class="tier ht4">LT4(Mace)🔨</span>
+<span class="tier ht4">HT4(Sword)⚔️</span>
+<span class="tier ht4">LT4(NethPot)🔥</span>
+</div>
+
+</div>
+
+<div class="overall-player">
+
+<div class="rank bronze">3</div>
+
+<img class="head" src="https://minotar.net/avatar/Sasuke1411">
+
+<div class="info">
+<div class="name">Sasuke1411</div>
+<div class="points">Rookie (8 points)</div>
+</div>
+
+<div class="region as">AS</div>
+
+<div class="tiers">
+<span class="tier ht4">LT4(Mace)🔨</span>
+<span class="tier ht4">LT4(Sword)⚔️</span>
+<span class="tier ht4">HT5(Cpvp)🔷</span>
+</div>
+
+</div>
+
+<div class="overall-player">
+
+<div class="rank Gray">4</div>
+
+<img class="head" src="https://minotar.net/avatar/Trinity">
+
+<div class="info">
+<div class="name">Trinity</div>
+<div class="points">Rookie (6 points)</div>
+</div>
+
+<div class="region as">AS</div>
+
+<div class="tiers">
+<span class="tier ht4">LT3(Cpvp)🔷</span>
+</div>
+
+</div>
+
+<div class="overall-player">
+
+<div class="rank Gray">4</div>
+
+<img class="head" src="https://minotar.net/avatar/Kaleemullah18">
+
+<div class="info">
+<div class="name">Kaleemullah18</div>
+<div class="points">Rookie (6 points)</div>
+</div>
+
+<div class="region as">AS</div>
+
+<div class="tiers">
+<span class="tier ht4">LT3(Cpvp)🔷</span>
+</div>
+
+</div>
+
+<div class="overall-player">
+
+<div class="rank Gray">5</div>
+
+<img class="head" src="https://minotar.net/avatar/Pomojz">
+
+<div class="info">
+<div class="name">Pomojz</div>
+<div class="points">Rookie (5 points)</div>
+</div>
+
+<div class="region as">AS</div>
+
+<div class="tiers">
+<span class="tier ht4">LT5(Sword)⚔️</span>
+<span class="tier ht4">HT4(Cpvp)🔷</span>
+</div>
+
+</div>
+
+<div class="overall-player">
+
+<div class="rank Gray">5</div>
+
+<img class="head" src="https://minotar.net/avatar/DarkDemo">
+
+<div class="info">
+<div class="name">DarkDemo</div>
+<div class="points">Rookie (5 points)</div>
+</div>
+
+<div class="region as">AS</div>
+
+<div class="tiers">
+<span class="tier ht4">HT5(Sword)⚔️</span>
+<span class="tier ht4">LT5(SMP)🌍</span>
+<span class="tier ht4">HT5(Cpvp)🔷</span>
+</div>
+
+</div>
+
+<div class="overall-player">
+
+<div class="rank Gray">6</div>
+
+<img class="head" src="https://minotar.net/avatar/SULTHANXGAMER">
+
+<div class="info">
+<div class="name">SULTHANXGAMER</div>
+<div class="points">Rookie (4 points)</div>
+</div>
+
+<div class="region as">AS</div>
+
+<div class="tiers">
+<span class="tier ht4">HT4(Cpvp)🔷</span>
+</div>
+
+</div>
+
+<div class="overall-player">
+
+<div class="rank Gray">6</div>
+
+<img class="head" src="https://minotar.net/avatar/OP_SONU">
+
+<div class="info">
+<div class="name">OP_SONU</div>
+<div class="points">Rookie (4 points)</div>
+</div>
+
+<div class="region as">AS</div>
+
+<div class="tiers">
+<span class="tier ht4">HT4(Cpvp)🔷</span>
+</div>
+
+</div>
+
+<div class="overall-player">
+
+<div class="rank Gray">6</div>
+
+<img class="head" src="https://minotar.net/avatar/DeveshXD1">
+
+<div class="info">
+<div class="name">DeveshXD1</div>
+<div class="points">Rookie (4 points)</div>
+</div>
+
+<div class="region as">AS</div>
+
+<div class="tiers">
+<span class="tier ht4">HT4(Cpvp)🔷</span>
+</div>
+
+</div>
+
+<div class="overall-player">
+
+<div class="rank Gray">6</div>
+
+<img class="head" src="https://minotar.net/avatar/ITZ_FULLYDOGZ">
+
+<div class="info">
+<div class="name">ITZ_FULLYDOGZ</div>
+<div class="points">Rookie (4 points)</div>
+</div>
+
+<div class="region as">AS</div>
+
+<div class="tiers">
+<span class="tier ht4">HT4(Cpvp)🔷</span>
+</div>
+
+</div>
+
+<div class="overall-player">
+
+<div class="rank Gray">7</div>
+
+<img class="head" src="https://minotar.net/avatar/Monster1037">
+
+<div class="info">
+<div class="name">Monster1037</div>
+<div class="points">Rookie (3 points)</div>
+</div>
+
+<div class="region as">AS</div>
+
+<div class="tiers">
+<span class="tier ht4">LT4(Cpvp)🔷</span>
+</div>
+
+</div>
+
+<div class="overall-player">
+
+<div class="rank Gray">7</div>
+
+<img class="head" src="https://minotar.net/avatar/cbmxp">
+
+<div class="info">
+<div class="name">cbmxp</div>
+<div class="points">Rookie (3 points)</div>
+</div>
+
+<div class="region as">AS</div>
+
+<div class="tiers">
+<span class="tier ht4">LT4(Cpvp)🔷</span>
+</div>
+
+</div>
+
+<div class="overall-player">
+
+<div class="rank Gray">7</div>
+
+<img class="head" src="https://minotar.net/avatar/Karanperoooo">
+
+<div class="info">
+<div class="name">Karanperoooo</div>
+<div class="points">Rookie (3 points)</div>
+</div>
+
+<div class="region as">AS</div>
+
+<div class="tiers">
+<span class="tier ht4">LT4(Cpvp)🔷</span>
+</div>
+
+</div>
+
+<div class="overall-player">
+
+<div class="rank Gray">7</div>
+
+<img class="head" src="https://minotar.net/avatar/Weemmbuu">
+
+<div class="info">
+<div class="name">Weemmbuu</div>
+<div class="points">Rookie (3 points)</div>
+</div>
+
+<div class="region eu">EU</div>
+
+<div class="tiers">
+<span class="tier ht4">LT4(Sword)⚔️</span>
+</div>
+
+</div>
+
+<div class="overall-player">
+
+<div class="rank Gray">8</div>
+
+<img class="head" src="https://minotar.net/avatar/Ancientiiixcyyy">
+
+<div class="info">
+<div class="name">Ancientiiixcyyy</div>
+<div class="points">Rookie (2 points)</div>
+</div>
+
+<div class="region as">AS</div>
+
+<div class="tiers">
+<span class="tier ht4">HT5(Cpvp)🔷</span>
+</div>
+
+</div>
+
+<div class="overall-player">
+
+<div class="rank Gray">9</div>
+
+<img class="head" src="https://minotar.net/avatar/OXYG3N">
+
+<div class="info">
+<div class="name">OXYG3N</div>
+<div class="points">Rookie (1 points)</div>
+</div>
+
+<div class="region as">AS</div>
+
+<div class="tiers">
+<span class="tier ht4">LT5(Cpvp)🔷</span>
+</div>
+
+</div>
+
+<div class="overall-player">
+
+<div class="rank Gray">9</div>
+
+<img class="head" src="https://minotar.net/avatar/Just_Xaddyyy">
+
+<div class="info">
+<div class="name">Just_Xaddyyy</div>
+<div class="points">Rookie (1 points)</div>
+</div>
+
+<div class="region as">AS</div>
+
+<div class="tiers">
+<span class="tier ht4">LT5(Cpvp)🔷</span>
+</div>
+
+</div>
+
+<div class="overall-player">
+
+<div class="rank Gray">9</div>
+
+<img class="head" src="https://minotar.net/avatar/iamlongiebruh">
+
+<div class="info">
+<div class="name">iamlongiebruh</div>
+<div class="points">Rookie (1 points)</div>
+</div>
+
+<div class="region as">AS</div>
+
+<div class="tiers">
+<span class="tier ht4">LT5(Cpvp)🔷</span>
+</div>
+
+</div>
+
+<div class="overall-player">
+
+<div class="rank Gray">9</div>
+
+<img class="head" src="https://minotar.net/avatar/Not_Flexxy2544">
+
+<div class="info">
+<div class="name">Not_Flexxy2544</div>
+<div class="points">Rookie (1 points)</div>
+</div>
+
+<div class="region as">AS</div>
+
+<div class="tiers">
+<span class="tier ht4">LT5(Cpvp)🔷</span>
+</div>
+
+</div>
+
+</div>
 
 </div>
 
@@ -236,12 +1038,22 @@ Pomojz
 SultanXGamer
 </div>
 
-<h3 class="sub">LT4</h3>
-
-<div class="player" onclick="show('OP_SONU','LT4')">
+<div class="player" onclick="show('OP_SONU','HT4')">
 <img src="https://minotar.net/avatar/OP_SONU">
 OP_SONU
 </div>
+
+<div class="player" onclick="show('DeveshXD1','HT4')">
+<img src="https://minotar.net/avatar/DeveshXD1">
+DeveshXD1
+</div>
+
+<div class="player" onclick="show('ITZ_FULLYDOGZ','HT4')">
+<img src="https://minotar.net/avatar/ITZ_FULLYDOGZ">
+ITZ_FULLYDOGZ
+</div>
+
+<h3 class="sub">LT4</h3>
 
 <div class="player" onclick="show('monster1037','LT4')">
 <img src="https://minotar.net/avatar/monster1037">
@@ -268,11 +1080,6 @@ Karanperoooo
 
 <h3 class="sub">HT5</h3>
 
-<div class="player" onclick="show('DeveshXD1','HT5')">
-<img src="https://minotar.net/avatar/DeveshXD1">
-DeveshXD1
-</div>
-
 <div class="player" onclick="show('Sasuke1411','HT5')">
 <img src="https://minotar.net/avatar/Sasuke1411">
 Sasuke1411
@@ -286,6 +1093,11 @@ DarkDemo
 <div class="player" onclick="show('Ancientiiixcyyy','HT5')">
 <img src="https://minotar.net/avatar/Ancientiiixcyyy">
 Ancientiiixcyyy
+</div>
+
+<div class="player" onclick="show('Ahnaf811','HT5')">
+<img src="https://minotar.net/avatar/Ahnaf811">
+Ahnaf811
 </div>
 
 <h3 class="sub">LT5</h3>
@@ -303,6 +1115,11 @@ Just_Xaddyyy
 <div class="player" onclick="show('Not_Flexxy2544','LT5')">
 <img src="https://minotar.net/avatar/Not_Flexxy2544">
 Not_Flexxy2544
+</div>
+
+<div class="player" onclick="show('iamlongiebruh','LT5')">
+<img src="https://minotar.net/avatar/iamlongiebruh">
+iamlongiebruh
 </div>
 
 </div>
@@ -542,11 +1359,21 @@ Ahnaf811
 Mezhukhotuo
 </div>
 
+<div class="player" onclick="show('AXENotMenace','HT4')">
+<img src="https://minotar.net/avatar/AXENotMenace">
+AXENotMenace
+</div>
+
 <h3 class="sub">LT4</h3>
 
 <div class="player" onclick="show('Sasuke1411','LT4')">
 <img src="https://minotar.net/avatar/Sasuke1411">
 Sasuke1411
+</div>
+
+<div class="player" onclick="show('Weemmbuu','LT4')">
+<img src="https://minotar.net/avatar/Weemmbuu">
+Weemmbuu
 </div>
 
 </div>
@@ -567,6 +1394,10 @@ DarkDemo
 
 <h3 class="sub">LT5</h3>
 
+<div class="player" onclick="show('Pomojz','LT5')">
+<img src="https://minotar.net/avatar/Pomojz">
+Pomojz
+</div>
 
 </div>
 
@@ -712,7 +1543,17 @@ DarkDemo
 
 <h3 class="sub">HT4</h3>
 
+<div class="player" onclick="show('Ahnaf811','HT4')">
+<img src="https://minotar.net/avatar/Ahnaf811">
+Ahnaf811
+</div>
+
 <h3 class="sub">LT4</h3>
+
+<div class="player" onclick="show('MezhuKhotuo','LT4')">
+<img src="https://minotar.net/avatar/MezhuKhotuo">
+MezhuKhotuo
+</div>
 
 </div>
 
@@ -891,34 +1732,6 @@ DarkDemo
 <h1>:🔮Crystal PvP Tier List</h1>
 </div>
 
-<div id="uhc" class="mode" style="display:none">
-<h1>🏹 UHC Tier List</h1>
-</div>
-
-<div id="mace" class="mode" style="display:none">
-<h1>🔨 Mace Tier List</h1>
-</div>
-
-<div id="sword" class="mode" style="display:none">
-<h1>⚔️ Sword Tier List</h1>
-</div>
-
-<div id="smp" class="mode" style="display:none">
-<h1>🌍 SMP Tier List</h1>
-</div>
-
-<div id="nethpot" class="mode" style="display:none">
-<h1>🔥 NethPot Tier List</h1>
-</div>
-
-<div id="dpot" class="mode" style="display:none">
-<h1>💧 DiamondPot Tier List</h1>
-</div>
-
-<div id="axe" class="mode" style="display:none">
-<h1>🪓 Axe Tier List</h1>
-</div>
-
 <!-- Popup -->
 
 <div class="popup" id="popup">
@@ -984,6 +1797,49 @@ document.getElementById("popup").style.display="none"
 
 }
 
+function searchPlayer(){
+
+let input = document.getElementById("playerSearch").value.toLowerCase();
+
+let players = document.querySelectorAll(".player");
+
+players.forEach(player => {
+
+let name = player.innerText.toLowerCase();
+
+if(name.includes(input)){
+player.style.display="flex";
+}else{
+player.style.display="none";
+}
+
+});
+
+}
+
+function updateLeaderboard(){
+
+let players = document.querySelectorAll(".overall-player");
+
+players.forEach(player => {
+
+player.classList.remove("move-up","move-down");
+
+/* random demo movement */
+let direction = Math.random();
+
+if(direction > 0.5){
+player.classList.add("move-up");
+}else{
+player.classList.add("move-down");
+}
+
+});
+
+}
+
+updateLeaderboard();
+
 </script>
 
 <h1>
@@ -1013,8 +1869,3 @@ Players are placed into different tiers to represent their strength in competiti
 </div>
 
 </body>
-
-
-
-
-
